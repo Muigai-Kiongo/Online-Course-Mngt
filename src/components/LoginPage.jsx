@@ -1,17 +1,59 @@
-// Generally this is the login page enatiling the login form and handling the form validation
-import React from 'react';
+import React, { useState } from 'react';
+import CourseContainer from './student/CourseContainer';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
-  console.log("LoginPage rendered");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({
+    username: "", 
+    password: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setUser(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault(); 
+    const { username, password } = user;
+
+    if (username === "Student" && password === "Student") {
+      setIsLoggedIn(true);
+      console.log('Success');
+    } else {
+      console.log('Login failed');
+    }
+  }
+
+    if (isLoggedIn) {
+    return <CourseContainer />;
+  }
+
   return (
     <div>
-      <h1>Login Page</h1>
-      <form>
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <button type="submit">Log In</button>
-      </form>
+      <h1>Students Login Page</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={user.username}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+          <button type="submit">Log In</button>
+          <Link to="/InstructorLogIn">SignIn as an Instructor</Link>
+        </form>
     </div>
   );
 }
-
