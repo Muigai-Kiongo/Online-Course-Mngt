@@ -11,6 +11,7 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 import EnrollmentPage from "./components/student/EnrollmentPage";
 
 
+
 export default function App() {
   console.log("App rendered")
   return (
@@ -20,13 +21,14 @@ export default function App() {
         <Route path="/" exact element={<HomePage />} />
         <Route path="/LoginPage" element={<LoginPage />} />
         <Route path="/InstructorLogIn" element={<InstructorLogIn />} />
+
         <Route element={<ProtectedRoutes />}>
             <Route path="/InstructorPanel" element={<InstructorPanel />} />
             <Route path="/CourseDetailsPage" element={<CourseDetailPage />} />
             <Route path="/Courses" element={<Courses />} />
             <Route path="/EnrollmentPage" element={<EnrollmentPage />} />
+            <Route path="/course/:id" element={<CourseDetailsPage />} />
         </Route>
-      </Routes>
     </Router>
   );
 }

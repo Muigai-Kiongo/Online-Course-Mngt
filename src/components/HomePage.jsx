@@ -16,8 +16,10 @@ export default function HomePage() {
                 alt={course.title}
               />
               <h2>{course.title}</h2>
-              <p className="duration">{course.duration}</p>
-              <p className="brief">{course.brief}</p>
+              <p className="instructor">Instructor: {course.instructor}</p>
+              <p className="category">Category: {course.category}</p>
+              <p className="duration">Duration: {course.duration}</p>
+              <p className="rating">Rating: {course.rating}</p>
             </Link>
           </div>
         ))}
