@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import HomePage from "./components/HomePage";
 import LoginPage from "./components/LoginPage";
-import InstructorLogIn from "./components/InstructorLogIn";
 import InstructorPanel from "./components/instructor/InstructorPanel";
 import CourseDetailPage from "./components/student/CourseDetailsPage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import InstructorLogIn from './components/InstructorLogIn';
 import EnrollmentPage from "./components/student/EnrollmentPage";
 
 export default function App() {
