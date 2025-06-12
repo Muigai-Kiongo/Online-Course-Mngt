@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import InstructorPanel from './instructor/InstructorPanel'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function InstructorLogIn() {
           const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,7 +31,7 @@ export default function InstructorLogIn() {
           }
         
             if (isLoggedIn) {
-                return <InstructorPanel />
+                return <Navigate to={"/InstructorPanel"}/>
             
           }
         
