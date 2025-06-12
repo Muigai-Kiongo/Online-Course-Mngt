@@ -1,8 +1,8 @@
-import React from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
 export default function ProtectedRoutes() {
-    let user;
+  let user;
 
   try {
     user = JSON.parse(localStorage.getItem('user'));
@@ -11,6 +11,8 @@ export default function ProtectedRoutes() {
   }
 
   const isValidUser = user && user.username && user.password;
-  console.log("user", user)
-  return user? <Outlet/> : <Navigate to="/LoginPage"/>
+
+  console.log("ProtectedRoutes: user =", user);
+
+  return isValidUser ? <Outlet /> : <Navigate to="/LoginPage" />;
 }
