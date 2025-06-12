@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import HomePage from "./HomePage";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-  });
+  const [user, setUser] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setUser((prev) => ({
+    setUser(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
   }
 
@@ -22,15 +18,12 @@ export default function LoginPage() {
     const { username, password } = user;
 
     if (username === "Student" && password === "Student") {
-      setIsLoggedIn(true);
-      console.log("Success");
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log('Success');
+      navigate("/Courses");
     } else {
-      console.log("Login failed");
+      console.log('Login failed');
     }
-  }
-
-  if (isLoggedIn) {
-    return <HomePage />;
   }
 
   return (
