@@ -22,6 +22,7 @@ export default function LoginPage() {
     const { username, password } = user;
 
     if (username === "Student" && password === "Student") {
+      localStorage.setItem("user", JSON.stringify(user));
       setIsLoggedIn(true);
       console.log('Success');
     } else {

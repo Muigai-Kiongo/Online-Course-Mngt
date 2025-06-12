@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import InstructorPanel from './instructor/InstructorPanel'
 import { Link, Navigate } from 'react-router-dom';
 
 export default function InstructorLogIn() {
@@ -23,6 +22,7 @@ export default function InstructorLogIn() {
             const { username, password } = user;
         
             if (username === "Instructor" && password === "Instructor") {
+              localStorage.setItem("user", JSON.stringify(user));
               setIsLoggedIn(true);
               console.log('Success');
             } else {
