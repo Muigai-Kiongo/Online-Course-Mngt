@@ -9,9 +9,12 @@ import CourseDetailPage from "./components/student/CourseDetailsPage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import InstructorLogIn from './components/InstructorLogIn';
 import EnrollmentPage from "./components/student/EnrollmentPage";
+import "./App.css";
+
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [theme, setTheme] = useState("Light");
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -29,10 +32,16 @@ export default function App() {
     localStorage.removeItem("user");
     setUser(null);
   };
+  const handleTheme = () => {
+  setTheme(prev => (prev === "Light" ? "Dark" : "Light"));
+  console.log("Theme Changed");
+};
+
 
   return (
     <Router>
-      <Header user={user} onLogout={handleLogout} />
+      <div className={theme.toLowerCase()}>
+      <Header user={user} onLogout={handleLogout} Theme={theme} setTheme={handleTheme} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/LoginPage" element={<LoginPage onLogin={handleLogin} />} />
@@ -44,6 +53,7 @@ export default function App() {
           <Route path="/course/:id" element={<CourseDetailPage />} />
         </Route>
       </Routes>
+      </div>
     </Router>
   );
 }

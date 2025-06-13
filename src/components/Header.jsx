@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 
-export default function Header({ user, onLogout }) {
+export default function Header({ user, onLogout, Theme, setTheme }) {
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
@@ -21,12 +21,18 @@ export default function Header({ user, onLogout }) {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/enrollPage">Enroll</Link></li>
         <li><Link to="/instructor-panel">Instructor Panel</Link></li>
+        <li>
+            <button onClick={setTheme}>
+            {Theme === "Light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </button>
+        </li>
 
         {user ? (
           <>
             <li><div>{initial}</div> {user.username}</li>
             <li><button onClick={handleLogoutClick}>Logout</button></li>
           </>
+          
         ) : (
           <li><Link to="/LoginPage">Login</Link></li>
         )}
