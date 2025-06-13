@@ -1,29 +1,36 @@
-// the Header component will include the logo search bar filter inputs and button, username and logout/login
-import { Link } from "react-router-dom";
+// Header.jsx
+import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 
-export default function Header() {
-  return (
-    <div>
-      <header>
-        <h2>School of Code(OCM)</h2>
-        <Search />
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+export default function Header({ user, onLogout }) {
+  const navigate = useNavigate();
 
-          <li>
-            <Link to="/enrollPage">Enroll</Link>
-          </li>
-          <li>
-            <Link to="/instructor-panel">Instructor Panel</Link>
-          </li>
-          <li>
-            <Link to="/LoginPage">Login</Link>
-          </li>
-        </ul>
-      </header>
-    </div>
+  const handleLogoutClick = () => {
+    onLogout();
+    navigate("/"); // redirect to home after logout
+  };
+ const initial = user?.username?.charAt(0).toUpperCase() || "";
+
+
+  return (
+    <header style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
+      <h2>School of Code (OCM)</h2>
+      <Search />
+
+      <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/enrollPage">Enroll</Link></li>
+        <li><Link to="/instructor-panel">Instructor Panel</Link></li>
+
+        {user ? (
+          <>
+            <li><div>{initial}</div> {user.username}</li>
+            <li><button onClick={handleLogoutClick}>Logout</button></li>
+          </>
+        ) : (
+          <li><Link to="/LoginPage">Login</Link></li>
+        )}
+      </ul>
+    </header>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function LoginPage() {
+export default function LoginPage({ onLogin }) {
   const [user, setUser] = useState({ username: "", password: "" });
   const navigate = useNavigate();
 
@@ -18,9 +18,8 @@ export default function LoginPage() {
     const { username, password } = user;
 
     if (username === "Student" && password === "Student") {
-      localStorage.setItem("user", JSON.stringify(user));
-      console.log('Success');
-      navigate("/Courses");
+      onLogin(user); // ✅ Call parent login handler
+      navigate("/Courses"); // redirect as needed
     } else {
       console.log('Login failed');
     }
@@ -28,7 +27,7 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h1>Students Login Page</h1>
+      <h2>Students' Login Page</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
