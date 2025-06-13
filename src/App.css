@@ -1,0 +1,52 @@
+/* App.css */
+
+:root {
+  --bg-color: white;
+  --text-color: black;
+  --border-color: #ccc;
+  --header-bg: #f9f9f9;
+  --button-bg: #eee;
+  --button-color: #333;
+}
+
+.dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --border-color: #444;
+  --header-bg: #1e1e1e;
+  --button-bg: #333;
+  --button-color: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+header {
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  opacity: 0.8;
+}

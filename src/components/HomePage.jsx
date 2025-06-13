@@ -3,7 +3,7 @@ import React from "react";
 import { courses } from "./student/Courses";
 import { Link } from "react-router-dom";
 
-export default function HomePage() {
+export default function HomePage(theme, setTheme) {
   return (
     <main>
       <div>
