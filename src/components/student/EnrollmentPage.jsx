@@ -22,6 +22,7 @@ export default function EnrollmentPage({ enrolledCourseIds }) {
                 alt={`${course.title} course thumbnail`}
                 loading="lazy"
                 decoding="async"
+                className="enrolled-course-thumbnail"
               />
               <div className="enrolled-course-info">
                 <h3 className="enrolled-course-title">{course.title}</h3>

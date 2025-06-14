@@ -1,3 +1,6 @@
+// The course details page with list all the details for a specific course
+// beneath may include other courses one may be intreseted
+// button for enrollment
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { courses } from "./Courses";
@@ -14,6 +17,7 @@ const CourseDetailsPage = ({ onEnroll, enrolledCourseIds }) => {
         <button
           onClick={() => navigate(-1)}
           aria-label="Go back to courses list"
+          className="back-button"
         >
           Go Back
         </button>
@@ -65,20 +69,14 @@ const CourseDetailsPage = ({ onEnroll, enrolledCourseIds }) => {
             ? `Already enrolled in ${course.title}`
             : `Enroll in ${course.title}`
         }
+        className="enroll-button"
       >
         {isEnrolled ? "Enrolled" : "Enroll"}
       </button>
       <button
         onClick={() => navigate(-1)}
         aria-label="Go back to courses list"
-        style={{
-          marginTop: "16px",
-          backgroundColor: "#ddd",
-          color: "#555",
-          borderRadius: "12px",
-          padding: "10px 20px",
-          cursor: "pointer",
-        }}
+        className="back-button"
       >
         Back to Courses
       </button>
