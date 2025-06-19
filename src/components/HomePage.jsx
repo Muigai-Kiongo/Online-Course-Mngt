@@ -1,11 +1,11 @@
 // this is the main component entailing header and courses list
 import React, { useState, useMemo } from "react";
-import { courses } from "./student/Courses";
+//import { courses } from "./student/Courses";
 import Search from "./Search";
 import CategoryFilter from "./CategoryFilter";
 import { Link } from "react-router-dom";
 
-export default function HomePage({ theme, setTheme }) {
+export default function HomePage({courses, theme, setTheme }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
