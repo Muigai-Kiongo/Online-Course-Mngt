@@ -3,9 +3,8 @@
 // button for enrollment
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { courses } from "./Courses";
 
-const CourseDetailsPage = ({ onEnroll, enrolledCourseIds }) => {
+const CourseDetailsPage = ({ courses, onEnroll, enrolledCourseIds  }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const course = courses.find((c) => c.id === parseInt(id));

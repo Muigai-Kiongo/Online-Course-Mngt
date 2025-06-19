@@ -18,8 +18,8 @@ export default function LoginPage({ onLogin }) {
     const { username, password } = user;
 
     if (username === "Instructor" && password === "Instructor") {
-      onLogin(user); // ✅ Call parent login handler
-      navigate("/Courses"); // redirect as needed
+      onLogin(user); 
+      navigate("/instructor-panel");
       console.log("Success in logging in")
     } else {
       console.log('Login failed');

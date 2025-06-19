@@ -3,7 +3,7 @@ export const courses = [
     id: 1,
     title: "Data Science",
     duration: "3 months",
-    category: "Technology",
+    category: "Agriculture",
     rating: "4.5",
     instructor: "John Ndhlovu",
     description: "An introduction to data science concepts and techniques.",
