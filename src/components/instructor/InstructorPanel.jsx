@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Search from "../Search";
 
 function InstructorPanel({ courses, setCourses, searchTerm, setSearchTerm}) {
   const [currentCourse, setCurrentCourse] = useState({ title: "", description: "" });
@@ -40,16 +41,8 @@ function InstructorPanel({ courses, setCourses, searchTerm, setSearchTerm}) {
       <button className="mr-4 ml-4 border-1">Instructor1</button>
       <button>Instructor2</button>
       <button>Instructor3</button>
-      <input
-        type="search"
-        className="search-input"
-        placeholder="Search by title, instructor, or category..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        aria-label="Search courses"
-        spellCheck={false}
-        autoComplete="off"
-      />
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
     </div>
       <ul>
         {courses.map((course) => (
