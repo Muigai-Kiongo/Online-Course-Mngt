@@ -90,7 +90,8 @@ export default function App() {
           setTheme={handleTheme}
         />
         <Routes>
-          <Route path="/" element={<HomePage courses={courses} theme={theme} setTheme={setTheme}/>} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/Home" element={<HomePage courses={courses} theme={theme} setTheme={setTheme}/>} />
           <Route
             path="/LoginPage"
             element={<LoginPage onLogin={handleLogin} />}
