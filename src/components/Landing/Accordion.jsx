@@ -42,9 +42,9 @@ export default function Accordion() {
         <div key={id} className="border rounded-md overflow-hidden">
           <button
             onClick={() => toggle(id)}
-            className="w-full px-4 py-3 text-left flex justify-between items-center bg-gray-100 hover:bg-gray-200 focus:outline-none"
+            className="w-full px-4 py-3 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-200 focus:outline-none"
           >
-            <span className="font-medium">{question}</span>
+            <span className="font-medium text-black dark:text-white hover:text-yellow-400">{question}</span>
             <svg
               className={`w-5 h-5 transform transition-transform duration-300 ${
                 openId === id ? "rotate-180" : ""
