@@ -1,15 +1,18 @@
 import React, { useState, useMemo } from "react";
 import Search from "../Search";
-import InstructorFilter from "./InstructorFilter"; // Renamed for clarity
+import InstructorFilter from "./InstructorFilter";
 
 function InstructorPanel({ courses, setCourses }) {
   const [currentCourse, setCurrentCourse] = useState({
     title: "",
+    instructor: "",
+    category: "",
     description: "",
   });
   const [editingId, setEditingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedInstructor, setSelectedInstructor] = useState("");
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const instructors = useMemo(() => {
     const uniqueInstructors = new Set();
@@ -47,24 +50,44 @@ function InstructorPanel({ courses, setCourses }) {
     } else {
       setCourses([...courses, { id: Date.now(), ...currentCourse }]);
     }
-    setCurrentCourse({ title: "", description: "" });
+    setCurrentCourse({
+      title: "",
+      instructor: "",
+      category: "",
+      description: "",
+    });
+    setIsPopupVisible(false);
   };
 
   const handleEdit = (id) => {
     const courseToEdit = courses.find((c) => c.id === id);
     setCurrentCourse(courseToEdit);
     setEditingId(id);
+    setIsPopupVisible(true);
   };
-  const handleDelete = (id) => {
-  const confirmDelete = window.confirm("Are you sure you want to delete this course?");
-  if (confirmDelete) {
-    setCourses(courses.filter((course) => course.id !== id));
-  }
-};
 
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this course?"
+    );
+    if (confirmDelete) {
+      setCourses(courses.filter((course) => course.id !== id));
+    }
+  };
+
+  const handleCreateNew = () => {
+    setCurrentCourse({
+      title: "",
+      instructor: "",
+      category: "",
+      description: "",
+    });
+    setEditingId(null);
+    setIsPopupVisible(true);
+  };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen  dark:bg-blue-950">
+    <div className="p-6 bg-gray-50 min-h-screen dark:bg-blue-950">
       <h2 className="text-2xl font-bold text-gray-800 mb-6 dark:text-gray-50">
         Instructor Courses
       </h2>
@@ -106,9 +129,9 @@ function InstructorPanel({ courses, setCourses }) {
               >
                 Edit
               </button>
-                            <button
+              <button
                 onClick={() => handleDelete(course.id)}
-                className="ml-4 mt-2 bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                className="ml-4 mt-2 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
               >
                 Delete
               </button>
@@ -117,35 +140,89 @@ function InstructorPanel({ courses, setCourses }) {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="title"
-          placeholder="Course Title"
-          value={currentCourse.title}
-          onChange={(e) =>
-            setCurrentCourse({ ...currentCourse, title: e.target.value })
-          }
-          required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="Course Description"
-          value={currentCourse.description}
-          onChange={(e) =>
-            setCurrentCourse({ ...currentCourse, description: e.target.value })
-          }
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          {editingId ? "Update Course" : "Add Course"}
-        </button>
-      </form>
+      <button
+        onClick={handleCreateNew}
+        className="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-105"
+      >
+        <span className="text-2xl">+</span>
+      </button>
+
+      {isPopupVisible && (
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-xs bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-lg font-semibold mb-4">
+              {editingId ? "Edit Course" : "Add Course"}
+            </h3>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="title"
+                placeholder="Course Title"
+                value={currentCourse.title}
+                onChange={(e) =>
+                  setCurrentCourse({ ...currentCourse, title: e.target.value })
+                }
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <input
+                type="text"
+                name="instructor"
+                placeholder="Course Instructor"
+                value={currentCourse.instructor}
+                onChange={(e) =>
+                  setCurrentCourse({
+                    ...currentCourse,
+                    instructor: e.target.value,
+                  })
+                }
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <input
+                type="text"
+                name="category"
+                placeholder="Course Category"
+                value={currentCourse.category}
+                onChange={(e) =>
+                  setCurrentCourse({
+                    ...currentCourse,
+                    category: e.target.value,
+                  })
+                }
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <input
+                type="text"
+                name="description"
+                placeholder="Course Description"
+                value={currentCourse.description}
+                onChange={(e) =>
+                  setCurrentCourse({
+                    ...currentCourse,
+                    description: e.target.value,
+                  })
+                }
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {editingId ? "Update Course" : "Add Course"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsPopupVisible(false)}
+                className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
