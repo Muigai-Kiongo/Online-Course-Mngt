@@ -52,7 +52,6 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // ✅ Persist courses when they change
   useEffect(() => {
     localStorage.setItem("courses", JSON.stringify(courses));
   }, [courses]);

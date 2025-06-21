@@ -55,6 +55,13 @@ function InstructorPanel({ courses, setCourses }) {
     setCurrentCourse(courseToEdit);
     setEditingId(id);
   };
+  const handleDelete = (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this course?");
+  if (confirmDelete) {
+    setCourses(courses.filter((course) => course.id !== id));
+  }
+};
+
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen  dark:bg-blue-950">
@@ -81,7 +88,7 @@ function InstructorPanel({ courses, setCourses }) {
           filteredCourses.map((course) => (
             <div
               key={course.id}
-              className="border border-gray-300 rounded-lg p-4"
+              className="border border-gray-300 rounded-lg p-4 transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
             >
               <h3 className="text-lg font-semibold">{course.title}</h3>
               <p>
@@ -98,6 +105,12 @@ function InstructorPanel({ courses, setCourses }) {
                 className="mt-2 bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
               >
                 Edit
+              </button>
+                            <button
+                onClick={() => handleDelete(course.id)}
+                className="ml-4 mt-2 bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+              >
+                Delete
               </button>
             </div>
           ))
